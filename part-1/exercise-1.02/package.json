@@ -1,0 +1,15 @@
+{
+  "name": "project",
+  "version": "0.0.1",
+  "description": "Project V0.1",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Kimmo Loefman",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
