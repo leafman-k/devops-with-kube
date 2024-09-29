@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: log-output
-          image: lofmakim/log-output:latest
+          image: lofmakim/log-output:d6c6094458c8b9c6a004c605252c6e7bc1feba45
