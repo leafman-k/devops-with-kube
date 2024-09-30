@@ -13,7 +13,7 @@ spec:
         app: project-app
     spec:
       containers:
-        - name: project-v04
+        - name: project-app
           image: lofmakim/project-app:v0.4
           env:
           - name: PORT
