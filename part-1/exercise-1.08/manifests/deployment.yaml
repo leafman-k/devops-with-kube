@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: project-app
+  template:
+    metadata:
+      labels:
+        app: project-app
+    spec:
+      containers:
+        - name: project-app
+          image: lofmakim/project-app:v0.5
+          env:
+          - name: PORT
+            value: "3000"
