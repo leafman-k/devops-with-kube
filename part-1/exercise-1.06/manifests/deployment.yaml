@@ -6,15 +6,15 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: project-v04
+      app: project-app
   template:
     metadata:
       labels:
-        app: project-v04
+        app: project-app
     spec:
       containers:
         - name: project-v04
-          image: lofmakim/project-v0.4:latest
+          image: lofmakim/project-app:v0.4
           env:
           - name: PORT
             value: "3000"

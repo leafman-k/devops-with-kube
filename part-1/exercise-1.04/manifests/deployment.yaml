@@ -6,12 +6,12 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: project-v02
+      app: project-app
   template:
     metadata:
       labels:
-        app: project-v02
+        app: project-app
     spec:
       containers:
-        - name: project-v02
-          image: lofmakim/project-v0.2:latest
+        - name: project-app
+          image: lofmakim/project-app:v0.2
