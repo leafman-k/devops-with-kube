@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reader-writer-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reader-writer
+  template:
+    metadata:
+      labels:
+        app: reader-writer
+    spec:
+      volumes:
+        - name: shared-log
+          emptyDir: {}
+      containers:
+        - name: reader-app
+          image: lofmakim/reader-app:v0.1
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/log
+        - name: writer-app
+          image: lofmakim/writer-app:v0.1
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/log
