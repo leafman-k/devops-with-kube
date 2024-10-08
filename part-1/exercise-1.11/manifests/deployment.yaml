@@ -18,7 +18,7 @@ spec:
             claimName: log-ping-claim
       containers:
         - name: log-output
-          image: lofmakim/log-output:3323ac6ba85c5d02093811da82823d104d348957
+          image: lofmakim/log-output:3629624f90aebb0cb3248be855b9255ff565a22f
           env:
           - name: PORT
             value: "3000"
