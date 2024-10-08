@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-ping-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-ping
+  template:
+    metadata:
+      labels:
+        app: log-ping
+    spec:
+      volumes:
+        - name: shared-log
+          persistentVolumeClaim:
+            claimName: log-ping-claim
+      containers:
+        - name: log-output
+          image: lofmakim/log-output:v0.1
+          env:
+          - name: PORT
+            value: "3000"
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/log
+        - name: pingpong-app
+          image: lofmakim/pingpong-app:v1.1
+          env:
+          - name: PORT
+            value: "3001"
+          volumeMounts:
+          - name: shared-log
+            mountPath: /usr/src/app/log
