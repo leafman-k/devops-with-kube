@@ -18,7 +18,7 @@ spec:
             claimName: log-ping-claim
       containers:
         - name: log-output
-          image: lofmakim/log-output:20e04050e20ec8087e8f6231b7194317e183151
+          image: lofmakim/log-output:dc5be5c659d8c0e304f62f40ae72548bd3361a10
           env:
           - name: PORT
             value: "3000"
@@ -26,7 +26,7 @@ spec:
           - name: shared-log
             mountPath: /usr/src/app/log
         - name: pingpong-app
-          image: lofmakim/pingpong-app:v1.1
+          image: lofmakim/pingpong-app:v1.2
           env:
           - name: PORT
             value: "3001"
