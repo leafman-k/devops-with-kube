@@ -8,8 +8,10 @@ spec:
     app: log-ping
   ports:
     - port: 2345
+      name: log-output
       protocol: TCP
       targetPort: 3000
     - port: 2346
+      name: pingpong-app
       protocol: TCP
       targetPort: 3001
