@@ -48,7 +48,13 @@ app.get('/', (req, res) => {
             res.status(500).send(err);
         } else {
             const timestamp = new Date().toISOString(); 
-            res.send(`${timestamp}: ${randomString}\n Ping / Pongs: ${counter}`);
+            res.write('<html>');
+            res.write('<head><title>Persistent Demo</title></head>');
+            res.write(`<p>${timestamp}: ${randomString}`);
+            res.write(`<p>Ping / Pongs: ${counter}`);
+            res.write('</body>');
+            res.write('</html');
+            return res.end();
         }
     });
 });
