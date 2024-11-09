@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reader-writer-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reader-writer
+  template:
+    metadata:
+      labels:
+        app: reader-writer
+    spec:
+      volumes:
+        - name: shared-img
+          persistentVolumeClaim:
+            claimName: reader-writer-claim
+      containers:
+        - name: reader-app
+          image: lofmakim/reader-app:v0.1
+          volumeMounts:
+          - name: shared-img
+            mountPath: /usr/src/app/img
+        - name: writer-app
+          image: lofmakim/writer-app:v0.2.1
+          volumeMounts:
+          - name: shared-img
+            mountPath: /usr/src/app/img
