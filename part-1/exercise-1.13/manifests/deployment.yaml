@@ -18,7 +18,7 @@ spec:
             claimName: reader-writer-claim
       containers:
         - name: reader-app
-          image: lofmakim/reader-app:v0.2.3
+          image: lofmakim/reader-app:v0.2.4
           volumeMounts:
           - name: shared-img
             mountPath: /usr/src/app/public/img
