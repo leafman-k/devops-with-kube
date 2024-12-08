@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-ping-dep
+  namespace: log-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-ping
+  template:
+    metadata:
+      labels:
+        app: log-ping
+    spec:
+      containers:
+        - name: log-output
+          image: lofmakim/log-output:v2.2.1
+          env:
+          - name: PORT
+            value: "3000"
+          - name: MESSAGE
+            valueFrom:
+              configMapKeyRef:
+                name: log-output-config
+                key: MESSAGE
+          volumeMounts:
+            - name: config-volume
+              mountPath: '/usr/src/app/config'
+        - name: pingpong-app
+          image: lofmakim/pingpong-app:v2.1
+          env:
+          - name: PORT
+            value: "3001"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: log-output-config
