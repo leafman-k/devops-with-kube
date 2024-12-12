@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-dep
+  namespace: todo-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-full
+  template:
+    metadata:
+      labels:
+        app: todo-full
+    spec:
+      volumes:
+        - name: shared-img
+          persistentVolumeClaim:
+            claimName: todo-claim
+      containers:
+        - name: todo-app
+          image: lofmakim/todo-app:v1.0.1
+          volumeMounts:
+          - name: shared-img
+            mountPath: /usr/src/app/public/img
+        - name: writer-app
+          image: lofmakim/writer-app:v0.2.1
+          volumeMounts:
+          - name: shared-img
+            mountPath: /usr/src/app/img
+        - name: todo-backend
+          image: lofmakim/todo-backend:v2.0
+          env:
+          - name: DB_HOST
+            value: postgres
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_USER
+            value: myuser
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
+          - name: DB_NAME
+            value: tododatabase

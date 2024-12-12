@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-scripts
+  namespace: todo-test
+data:
+  init.sql: |
+    CREATE TABLE todos (
+      id SERIAL PRIMARY KEY, 
+      title VARCHAR(140) NOT NULL
+    );
