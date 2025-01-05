@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-scripts
+  namespace: log-test
+data:
+  init.sql: |
+    CREATE TABLE log_counter (
+        id SERIAL PRIMARY KEY,
+        counter INT NOT NULL
+    );
+    
+    INSERT INTO log_counter (id, counter) VALUES (1, 0); 

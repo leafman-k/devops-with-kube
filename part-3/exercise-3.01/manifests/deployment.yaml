@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ping-dep
+  namespace: log-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ping-app
+  template:
+    metadata:
+      labels:
+        app: ping-app
+    spec:
+      containers:
+        - name: pingpong-app
+          image: lofmakim/pingpong-app:v3.1
+          imagePullPolicy: Always
+          env:
+          - name: PORT
+            value: "3001"
+          - name: DB_HOST
+            value: postgres
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_USER
+            value: myuser
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-secret
+                key: POSTGRES_PASSWORD
+          - name: DB_NAME
+            value: mydatabase
